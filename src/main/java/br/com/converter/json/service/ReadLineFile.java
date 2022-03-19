@@ -8,6 +8,11 @@ public class ReadLineFile {
 
     public String readingLineFile(String path) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(path));
-        return br.readLine();
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line + ";\n");
+        }
+        return sb.toString();
     }
 }
