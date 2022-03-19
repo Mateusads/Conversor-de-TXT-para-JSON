@@ -25,6 +25,6 @@ public class ReadLineFileTest {
 
         assertThatExceptionOfType(FileNotFoundException.class).isThrownBy(() ->{
             var line = readLine.readingLineFile("./fileNotFound");
-        }).withMessageContaining("./fileNotFound (Arquivo ou diretório inexistente)");
+        }).withMessageContaining("./fileNotFound (No such file or directory)");
     }
 }
