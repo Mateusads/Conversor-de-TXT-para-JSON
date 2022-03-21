@@ -7,7 +7,6 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ConverterToJson {
 

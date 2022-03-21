@@ -2,6 +2,7 @@ package br.com.converter.json.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Getter
 @Builder
 public class Order {
@@ -23,7 +25,7 @@ public class Order {
         addAmount(product.getValue());
     }
 
-    public void addAmount(double value){
+    private void addAmount(double value){
         this.amount += value;
     }
 }

@@ -11,8 +11,6 @@ import java.io.IOException;
 
 public class Main {
     private static String path = "./src/main/resources/fileTwoLine.txt";
-    private static String line = "";
-    private static StringBuilder response = new StringBuilder();
 
     public static void main(String[] args) {
         try {

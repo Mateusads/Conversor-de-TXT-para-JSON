@@ -9,48 +9,49 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateObjects {
 
     private Map<String, Object> objects = new HashMap<>();
-    private CreateUser createUser = new CreateUser();
-    private CreateOrder createOrder = new CreateOrder();
-    private CreateProduct createProduct = new CreateProduct();
+    private final CreateUser createUser = new CreateUser();
+    private final CreateOrder createOrder = new CreateOrder();
+    private final CreateProduct createProduct = new CreateProduct();
 
-    public User create(Map<String, Object> valuesCreate)  {
-        try{
-            var userId = (int) valuesCreate.get("userId");
-            var userName = (String) valuesCreate.get("userName");
-            var user = createUser(userId, userName);
-
-            var orderId = (int) valuesCreate.get("orderId");
-            var orderDate = (LocalDate) valuesCreate.get("orderDate");
-            var order = createOrder(orderId, orderDate);
-
-            var productId = (int) valuesCreate.get("productId");
-            var productValue = (double) valuesCreate.get("productValue");
-            var product = createProduct(productId, productValue);
-
+    public void create(Map<String, Object> valuesCreate)  {
+        /*try{
+            var user = creatingUser(valuesCreate);
+            var order = createOrder(valuesCreate);
+            var product = createProduct(valuesCreate);
             order.addProduct(product);
             user.addOrder(order);
             return user;
         }catch (NullPointerException e){
             System.out.println(e.getMessage());
         }
-        return User.builder().build();
+        return User.builder().build();*/
     }
 
-    public User createUser(int userId, String userName){
+    public User creatingUser(Map<String, Object> valuesCreate, Map<Integer, User> users) throws NullPointerException{
+        var userId = (Integer) valuesCreate.get("userId");
+        var userName = (String) valuesCreate.get("userName");
+        if(users.containsKey(userId)) return users.get(userId);
         return createUser.create(userId, userName);
     }
 
-    public Order createOrder(int id, LocalDate date){
-        return createOrder.create(id, date);
+    public Order createOrder(Map<String, Object> valuesCreate, Map<Integer, Order> orders) throws NullPointerException{
+        var orderId = (Integer) valuesCreate.get("orderId");
+        var orderDate = (LocalDate) valuesCreate.get("orderDate");
+        if(orders.containsKey(orderId)) return orders.get(orderId);
+        return createOrder.create(orderId, orderDate);
     }
 
-    public Product createProduct(int id, double value){
-        return createProduct.create(id, value);
+        public Product createProduct(Map<String, Object> valuesCreate) throws NullPointerException{
+        var productId = (Integer) valuesCreate.get("productId");
+        var productValue = (Double) valuesCreate.get("productValue");
+        return createProduct.create(productId, productValue);
     }
+
 }
