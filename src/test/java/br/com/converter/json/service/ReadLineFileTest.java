@@ -23,12 +23,9 @@ public class ReadLineFileTest {
     public void testReadLineFileTwoLine() throws IOException {
         ReadLineFile readLine = new ReadLineFile();
         var linesFile = readLine.readingLineFile("./src/main/resources/fileTwoLine.txt");
-        var lines = linesFile.split(";");
-        var lineOne = lines[0];
-        var lineTwo = lines[1];
 
-        assertThat(lineOne).isEqualTo("0000000071                               Everett Beahan00000007610000000004    1881.5420210702");
-        assertThat(lineTwo).isEqualTo("0000000085                                 Tomaz Muller00000004210000000007    1641.2120210501");
+        assertThat("lineOne").isEqualTo("0000000071                               Everett Beahan00000007610000000004    1881.5420210702");
+        assertThat("lineTwo").isEqualTo("0000000085                                 Tomaz Muller00000004210000000007    1641.2120210501");
     }
 
     @Test

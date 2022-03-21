@@ -1,6 +1,7 @@
 package br.com.converter.json.service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,13 +11,18 @@ public class ExtractDataService {
 
     public Map<String, Object> extractDataLine(String line) {
 
+        try{
         var userId = Integer.parseInt(extractDataIndex(line, INDEX_USER_ID.getStart(), INDEX_USER_ID.getEnd()));
-        var userName = extractDataIndex(line, INDEX_USER_NAME.getStart(), INDEX_USER_NAME.getEnd());
+        var userName = extractDataIndex(line, INDEX_USER_NAME.getStart(), INDEX_USER_NAME.getEnd()).trim();
         var orderId = Integer.parseInt(extractDataIndex(line, INDEX_ORDER_ID.getStart(), INDEX_ORDER_ID.getEnd()));
         var orderDate = parseLocalDate(extractDataIndex(line, INDEX_ORDER_DATE.getStart(), INDEX_ORDER_DATE.getEnd()));
         var productId = Integer.parseInt(extractDataIndex(line, INDEX_PRODUCT_ID.getStart(), INDEX_PRODUCT_ID.getEnd()));
         var productValue = Double.parseDouble(extractDataIndex(line, INDEX_PRODUCT_VALUE.getStart(), INDEX_PRODUCT_VALUE.getEnd()));
         return createMapObjects(userId, userName, orderId, orderDate, productId, productValue);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return Collections.emptyMap();
     }
 
     private Map<String, Object> createMapObjects(int userId, String userName, int orderId, LocalDate orderDate, int productId, double productValue) {
