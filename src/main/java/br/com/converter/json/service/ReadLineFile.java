@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class ReadLineFile {
 
-    public String readingLineFile(String path) throws IOException {
+    public BufferedReader readingLineFile(String path) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(path));
-        return br.readLine();
+        return br;
     }
 }
