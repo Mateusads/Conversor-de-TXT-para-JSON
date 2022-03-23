@@ -2,8 +2,8 @@ package br.com.converter.json.service;
 
 import java.time.LocalDate;
 
-import static br.com.converter.json.service.enums.IndexConvertType.*;
 import static br.com.converter.json.service.enums.IndexConvertDate.*;
+import static br.com.converter.json.service.enums.IndexConvertType.*;
 
 public class ExtractDataService {
 
