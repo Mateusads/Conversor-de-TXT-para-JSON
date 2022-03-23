@@ -4,7 +4,6 @@ package br.com.converter.json.service;
 import br.com.converter.json.model.Product;
 import org.junit.Test;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateProductTest{

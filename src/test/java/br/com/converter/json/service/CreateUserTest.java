@@ -2,6 +2,7 @@ package br.com.converter.json.service;
 
 import br.com.converter.json.model.User;
 import org.junit.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateUserTest {

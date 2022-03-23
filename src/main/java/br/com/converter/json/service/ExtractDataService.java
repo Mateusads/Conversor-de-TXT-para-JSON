@@ -1,57 +1,67 @@
 package br.com.converter.json.service;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import static br.com.converter.json.service.enums.IndexConvertType.*;
+import static br.com.converter.json.service.enums.IndexConvertDate.*;
 
 public class ExtractDataService {
 
-    public Map<String, Object> extractDataLine(String line) {
-
-        try{
+    public int extractUserId(String line){
         var userId = Integer.parseInt(extractDataIndex(line, INDEX_USER_ID.getStart(), INDEX_USER_ID.getEnd()));
-        var userName = extractDataIndex(line, INDEX_USER_NAME.getStart(), INDEX_USER_NAME.getEnd()).trim();
-        var orderId = Integer.parseInt(extractDataIndex(line, INDEX_ORDER_ID.getStart(), INDEX_ORDER_ID.getEnd()));
-        var orderDate = parseLocalDate(extractDataIndex(line, INDEX_ORDER_DATE.getStart(), INDEX_ORDER_DATE.getEnd()));
-        var productId = Integer.parseInt(extractDataIndex(line, INDEX_PRODUCT_ID.getStart(), INDEX_PRODUCT_ID.getEnd()));
-        var productValue = Double.parseDouble(extractDataIndex(line, INDEX_PRODUCT_VALUE.getStart(), INDEX_PRODUCT_VALUE.getEnd()));
-        return createMapObjects(userId, userName, orderId, orderDate, productId, productValue);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        return Collections.emptyMap();
+        return userId;
     }
 
-    private Map<String, Object> createMapObjects(int userId, String userName, int orderId, LocalDate orderDate, int productId, double productValue) {
-        Map<String, Object> valuesLine = new HashMap<>();
-        valuesLine.put("userId", userId);
-        valuesLine.put("userName", userName);
-        valuesLine.put("orderId", orderId);
-        valuesLine.put("orderDate", orderDate);
-        valuesLine.put("productId", productId);
-        valuesLine.put("productValue", productValue);
-        return valuesLine;
+    public String extractUserName(String line){
+        var userName = extractDataIndex(line, INDEX_USER_NAME.getStart(), INDEX_USER_NAME.getEnd()).trim();
+        return userName;
+    }
+
+    public int extractOrderId(String line) throws NumberFormatException {
+        var orderId = Integer.parseInt(extractDataIndex(line, INDEX_ORDER_ID.getStart(), INDEX_ORDER_ID.getEnd()));
+        return orderId;
+    }
+
+    public LocalDate extractOrderDate(String line){
+        var orderDate = parseLocalDate(extractDataIndex(line, INDEX_ORDER_DATE.getStart(), INDEX_ORDER_DATE.getEnd()));
+        return orderDate;
+    }
+
+    public int extractProductId(String line) throws NumberFormatException {
+        var productId = Integer.parseInt(extractDataIndex(line, INDEX_PRODUCT_ID.getStart(), INDEX_PRODUCT_ID.getEnd()));
+        return productId;
+    }
+
+    public Double extractProductValue(String line) throws NumberFormatException {
+        var productValue = Double.parseDouble(extractDataIndex(line, INDEX_PRODUCT_VALUE.getStart(), INDEX_PRODUCT_VALUE.getEnd()));
+        return productValue;
     }
 
     private String extractDataIndex(String line, int start, int end){
-        if (line.length() < start || line.length() < end) {
-            if(line.length() >= start){
-                return line.substring(start, line.length());
-            }else
-                return line.substring(0, line.length());
-        } else {
-            return line.substring(start, end);
+        int lineSize = line.length();
+        try {
+            if (lineSize > end) {
+                return line.substring(start, end);
+            }
+            if (lineSize < end && lineSize > start) {
+                return line.substring(start, lineSize);
+            } else
+                throw new IndexOutOfBoundsException();
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("500 Erro: Incorrect line size");
         }
+        return new String("");
     }
 
     private LocalDate parseLocalDate(String lineDate) {
-        LocalDate transformedDate = LocalDate.of(Integer.parseInt(lineDate.substring(0, 4)),
-                Integer.parseInt(lineDate.substring(4, 6)),
-                Integer.parseInt(lineDate.substring(6, 8)));
-        return transformedDate;
+        try{
+            LocalDate transformedDate = LocalDate.of(Integer.parseInt(lineDate.substring(YEAR.getStart(), YEAR.getEnd())),
+                    Integer.parseInt(lineDate.substring(MONTH.getStart(), MONTH.getEnd())),
+                    Integer.parseInt(lineDate.substring(DAY.getStart(), DAY.getEnd())));
+            return transformedDate;
+        }catch (StringIndexOutOfBoundsException e){
+            System.out.println("500 Date conversion error: Check line pattern");
+        }
+        return LocalDate.now();
     }
-
 }

@@ -18,7 +18,7 @@ public class Order {
     private int id;
     private LocalDate date;
     private double amount;
-    private final List<Product> productList = new ArrayList<>();;
+    private final List<Product> productList = new ArrayList<>();
 
     public void addProduct(Product product) {
         this.productList.add(product);

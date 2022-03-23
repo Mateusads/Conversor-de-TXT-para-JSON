@@ -1,32 +1,33 @@
 package br.com.converter.json.service;
 
-import br.com.converter.json.model.Order;
 import br.com.converter.json.model.User;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ProcessingObject {
 
     private final ExtractDataService extract = new ExtractDataService();
     private final CreateObjects createObjects = new CreateObjects();
-    private static Map<Integer, User> usersExisting = new HashMap<>();
-    private static Map<Integer, Order> ordersExisting = new HashMap<>();
 
-    public User processCreateObject(String line){
+    public User processCreateObject(String line) {
 
-        var valuesCreateObjects = extract.extractDataLine(line);
-        var newUser = createObjects.creatingUser(valuesCreateObjects, usersExisting);
-        var newOrder = createObjects.createOrder(valuesCreateObjects, ordersExisting);
-        var newProduct = createObjects.createProduct(valuesCreateObjects);
-        usersExisting.put(newUser.getId(), newUser);
-        ordersExisting.put(newOrder.getId(), newOrder);
+        try {
+            var userId = extract.extractUserId(line);
+            var userName = extract.extractUserName(line);
+            var user = createObjects.creatingUser(userId, userName);
 
-        newOrder.addProduct(newProduct);
-        newUser.addOrder(newOrder);
-        return newUser;
+            var orderId = extract.extractOrderId(line);
+            var orderDate = extract.extractOrderDate(line);
+            var order = createObjects.createOrder(orderId, orderDate);
+
+            var productId = extract.extractProductId(line);
+            var productValue = extract.extractProductValue(line);
+            var product = createObjects.createProduct(productId, productValue);
+
+            order.addProduct(product);
+            user.addOrder(order);
+            return user;
+        } catch (NumberFormatException e) {
+            System.out.println("500 Erro: Non-standard line for conversion");
+        }
+        return User.builder().build();
     }
 }

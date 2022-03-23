@@ -5,9 +5,9 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -20,8 +20,17 @@ public class User {
     private int id;
     private String name;
     private final Set<Order> orders = new HashSet<>();
+    private static Map<Integer, Order> existingOrder = new HashMap<Integer, Order>();
 
     public void addOrder(Order order) {
-        this.orders.add(order);
+        if (existingOrder.containsKey(order.getId())) {
+            var orderExistent = existingOrder.get(order.getId());
+            for (Product product : order.getProductList()) {
+                orderExistent.addProduct(product);
+            }
+        } else {
+            this.orders.add(order);
+            existingOrder.put(order.getId(), order);
+        }
     }
 }
