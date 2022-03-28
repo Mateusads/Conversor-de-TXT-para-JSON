@@ -13,14 +13,14 @@ public class ReadLineFileTest {
     private ReadLineFile read = new ReadLineFile();
 
     @Test
-    public void ShouldReturnBufferReaderForOneReadLine() throws IOException {
+    public void shouldReturnBufferReaderForOneReadLine() throws IOException {
         var bufferRead = read.readingLineFile("./src/main/resources/fileOneLine.txt");
 
         assertThat(bufferRead.readLine()).isEqualTo("0000000071                               Everett Beahan00000007610000000004    1881.5420210702");
     }
 
     @Test
-    public void ShouldReturnBufferReaderForTwoReadLine() throws IOException {
+    public void shouldReturnBufferReaderForTwoReadLine() throws IOException {
         var bufferRead = read.readingLineFile("./src/main/resources/fileTwoLine.txt");
 
         assertThat(bufferRead.readLine()).isEqualTo("0000000070                              Palmer Prosacco00000007530000000033     1836.7420210308");
@@ -28,7 +28,7 @@ public class ReadLineFileTest {
     }
 
     @Test
-    public void ShouldThrowsFileNotFoundException() throws IOException {
+    public void shouldThrowsFileNotFoundException() throws IOException {
 
         assertThatExceptionOfType(FileNotFoundException.class).isThrownBy(() ->{
             var bufferRead = read.readingLineFile("./fileNotFound");

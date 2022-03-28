@@ -50,7 +50,7 @@ public class ExtractDataService {
         }catch (IndexOutOfBoundsException e){
             System.out.println("500 Erro: Incorrect line size");
         }
-        return new String("");
+        return ("");
     }
 
     private LocalDate parseLocalDate(String lineDate) {

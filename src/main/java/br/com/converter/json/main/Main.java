@@ -7,7 +7,7 @@ import br.com.converter.json.service.ReadLineFile;
 import java.io.IOException;
 
 public class Main {
-    private static String path = "./src/main/resources/fileTwoLine.txt";
+    private static String path = "./src/main/resources/fileData.txt";
     private static ReadLineFile readLine = new ReadLineFile();
     private static ConverterToJson converterJson = new ConverterToJson();
     private static ResponseProcessUser responseConvertLineInUsers = new ResponseProcessUser();
@@ -24,6 +24,8 @@ public class Main {
             System.out.print(usersJson);
         } catch (IOException e) {
             System.out.println("500: Server Error.");
+        }finally {
+            System.out.print("End a program");
         }
     }
 }

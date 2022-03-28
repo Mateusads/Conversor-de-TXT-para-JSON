@@ -1,5 +1,6 @@
 package br.com.converter.json.service;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -8,10 +9,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateObjectsTest {
 
-    private CreateObjects createObjects = new CreateObjects();
+    private CreateObjects createObjects;
+
+    @Before
+    public void preparingTestScenario(){
+        createObjects = new CreateObjects();
+    }
 
     @Test
-    public void CreateUserFromParam(){
+    public void shouldCreateUserFromParam(){
         int userId = 1;
         String userName = "Mateus Medeiros";
         var user = createObjects.creatingUser(userId, userName);
@@ -20,7 +26,7 @@ public class CreateObjectsTest {
     }
 
     @Test
-    public void CreateOrderFromParam(){
+    public void shouldCreateOrderFromParam(){
         int orderId = 10;
         LocalDate date = LocalDate.of(2022,03,10);
         var order = createObjects.createOrder(orderId, date);
@@ -30,7 +36,7 @@ public class CreateObjectsTest {
     }
 
     @Test
-    public void CreateProductFromParam(){
+    public void shouldCreateProductFromParam(){
         int productId = 23;
         Double value = 1.30D;
         var product = createObjects.createProduct(productId, value);
