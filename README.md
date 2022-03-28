@@ -46,9 +46,11 @@ tasks para garantir que tudo está correto.
 # Rodando o projeto
  
 
-Faça clone do projeto em sua maquina (copie o https e no seu terminal digite git clone <cole o link>)
+Faça clone do projeto em sua maquina (copie o https e no seu terminal digite git clone "cole o link")
   
 Com o repositório em sua maquina, entre na pasta Conversor-de-TXT-para-JSON e digite "mvn clean install"
   
-Agora abra o terminal e digite "Java -jar json-converter-1.0.jar <caminho do seu documento no padrão> (OBS: Caso não passe nenhum documento por parâmetro o documento de exemplo será exibido no formato Json)
+Agora dentro da pasta target que foi gerada, abra o terminal e digite "Java -jar json-converter-1.0.jar "caminho do seu documento no padrão" exemplo C:\Documents\arquivo.txt
+
+(OBS: Caso não passe nenhum caminho por parâmetro o documento de exemplo será exibido no formato Json)
   
