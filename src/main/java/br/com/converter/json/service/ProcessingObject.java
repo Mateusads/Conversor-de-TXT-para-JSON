@@ -1,11 +1,23 @@
 package br.com.converter.json.service;
 
 import br.com.converter.json.model.User;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class ProcessingObject {
 
-    private final ExtractDataService extract = new ExtractDataService();
-    private final CreateObjects createObjects = new CreateObjects();
+    private ExtractDataService extract;
+    private CreateObjects createObjects;
+
+    public ProcessingObject(){
+        this.extract = new ExtractDataService();
+        createObjects = new CreateObjects();
+    }
+
+    public ProcessingObject(CreateObjects createObjects) {
+        this.extract = new ExtractDataService();
+        this.createObjects = createObjects;
+    }
 
     public User processCreateObject(String line) {
 
