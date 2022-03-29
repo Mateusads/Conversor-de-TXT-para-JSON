@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 
 @AllArgsConstructor
-public class ProcessingObject {
+public class ProcessingObjectService {
 
     private ExtractDataService extract;
 

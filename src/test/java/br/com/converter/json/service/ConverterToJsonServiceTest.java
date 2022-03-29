@@ -9,13 +9,13 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConverterToJsonTest {
+public class ConverterToJsonServiceTest {
 
-    private ConverterToJson converterJson;
+    private ConverterToJsonService converterJson;
 
     @BeforeEach
     public void preparingTestScenario(){
-        converterJson = new ConverterToJson();
+        converterJson = new ConverterToJsonService();
     }
 
     @Test

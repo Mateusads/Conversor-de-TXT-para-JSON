@@ -14,13 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProcessingObjectTest {
+public class ProcessingObjectServiceTest {
 
     @Mock
     private ExtractDataService extractDataService;
 
     @InjectMocks
-    private ProcessingObject processing;
+    private ProcessingObjectService processing;
 
     private  String line;
 
@@ -51,7 +51,7 @@ public class ProcessingObjectTest {
         int userId = 71;
         String userName = "Everett Beahan";
         int orderId = 761;
-        LocalDate orderDate = LocalDate.of(2021,7,02);
+        LocalDate orderDate = LocalDate.of(2021,7,2);
         int productId = 4;
         double productValue = 1881.542;
 

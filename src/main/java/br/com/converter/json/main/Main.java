@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class Main {
     private static String path = "./src/main/resources/fileTwoLine.txt";
-    private static final ReadLineFile readLine = new ReadLineFile();
-    private static final ConverterToJson converterJson = new ConverterToJson();
-    private static final ExtractDataService extractDate = new ExtractDataService();;
-    private static final ProcessingObject processingObjects = new ProcessingObject(extractDate);
-    private static final ResponseProcessUser responseConvertLineInUsers = new ResponseProcessUser(processingObjects);
+    private static final ReadLineFileService readLine = new ReadLineFileService();
+    private static final ConverterToJsonService converterJson = new ConverterToJsonService();
+    private static final ExtractDataService extractDate = new ExtractDataService();
+    private static final ProcessingObjectService PROCESSING_OBJECTS_SERVICE = new ProcessingObjectService(extractDate);
+    private static final ResponseProcessUser responseConvertLineInUsers = new ResponseProcessUser(PROCESSING_OBJECTS_SERVICE);
     
     public static void main(String[] args) {
         try {
@@ -24,7 +24,7 @@ public class Main {
             var usersJson = converterJson.converter(usersConverterJson);
             System.out.print(usersJson);
         } catch (IOException e) {
-            System.out.println("404: File not found or in error.");
+            System.out.println("404: File not found or in incorrect path.");
         }finally {
             System.out.print("End a program");
         }

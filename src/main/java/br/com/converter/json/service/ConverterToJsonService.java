@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
-public class ConverterToJson {
+public class ConverterToJsonService {
 
     private static JsonPrimitive jsonPrimitive (String format){
         return new JsonPrimitive(format);

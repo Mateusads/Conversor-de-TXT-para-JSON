@@ -10,9 +10,9 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-public class ReadLineFileTest {
+public class ReadLineFileServiceTest {
 
-    private ReadLineFile read = new ReadLineFile();
+    private ReadLineFileService read = new ReadLineFileService();
 
     @Test
     public void shouldReturnBufferReaderForOneReadLine() throws IOException {
@@ -30,9 +30,9 @@ public class ReadLineFileTest {
     }
 
     @Test
-    public void shouldThrowsFileNotFoundException() throws IOException {
+    public void shouldThrowsFileNotFoundException(){
 
-        assertThatExceptionOfType(FileNotFoundException.class).isThrownBy(() ->{
+        assertThatExceptionOfType(IOException.class).isThrownBy(() ->{
             var bufferRead = read.readingLineFile("./fileNotFound");
         }).withMessageContaining("./fileNotFound (No such file or directory)");
     }
