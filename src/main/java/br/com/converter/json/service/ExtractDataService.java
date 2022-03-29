@@ -1,15 +1,18 @@
 package br.com.converter.json.service;
 
+import lombok.AllArgsConstructor;
+
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import static br.com.converter.json.service.enums.IndexConvertDate.*;
 import static br.com.converter.json.service.enums.IndexConvertType.*;
 
+@AllArgsConstructor
 public class ExtractDataService {
 
     public int extractUserId(String line){
-        var userId = Integer.parseInt(extractDataIndex(line, INDEX_USER_ID.getStart(), INDEX_USER_ID.getEnd()));
-        return userId;
+        return Integer.parseInt(extractDataIndex(line, INDEX_USER_ID.getStart(), INDEX_USER_ID.getEnd()));
     }
 
     public String extractUserName(String line){
@@ -48,7 +51,7 @@ public class ExtractDataService {
             } else
                 throw new IndexOutOfBoundsException();
         }catch (IndexOutOfBoundsException e){
-            System.out.println("500 Erro: Incorrect line size");
+            System.out.println("400 Erro: Incorrect line size");
         }
         return ("");
     }
@@ -59,9 +62,9 @@ public class ExtractDataService {
                     Integer.parseInt(lineDate.substring(MONTH.getStart(), MONTH.getEnd())),
                     Integer.parseInt(lineDate.substring(DAY.getStart(), DAY.getEnd())));
             return transformedDate;
-        }catch (StringIndexOutOfBoundsException e){
-            System.out.println("500 Date conversion error: Check line pattern");
+        }catch (StringIndexOutOfBoundsException | DateTimeException e){
+            System.out.println("400 Date conversion error: Check line pattern");
         }
-        return LocalDate.now();
+        return LocalDate.of(1900,1,1);
     }
 }

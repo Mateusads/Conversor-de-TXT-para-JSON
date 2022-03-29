@@ -17,15 +17,15 @@ import java.util.Set;
 @EqualsAndHashCode(of = "id")
 public class User {
 
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     private final Set<Order> orders = new HashSet<>();
-    private static Map<Integer, Order> existingOrder = new HashMap<Integer, Order>();
+    private static final Map<Integer, Order> existingOrder = new HashMap<>();
 
     public void addOrder(Order order) {
         if (existingOrder.containsKey(order.getId())) {
             var orderExistent = existingOrder.get(order.getId());
-            for (Product product : order.getProductList()) {
+            for (Product product : order.getProducts()) {
                 orderExistent.addProduct(product);
             }
         } else {

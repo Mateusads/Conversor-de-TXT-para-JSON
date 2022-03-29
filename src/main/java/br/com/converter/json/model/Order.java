@@ -15,13 +15,13 @@ import java.util.List;
 @Builder
 public class Order {
 
-    private int id;
-    private LocalDate date;
+    private final int id;
+    private final LocalDate date;
     private double amount;
-    private final List<Product> productList = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product) {
-        this.productList.add(product);
+        this.products.add(product);
         addAmount(product.getValue());
     }
 
