@@ -1,9 +1,8 @@
 package br.com.converter.json.service;
 
 import br.com.converter.json.model.User;
-import com.google.gson.Gson;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +13,7 @@ public class ConverterToJsonTest {
 
     private ConverterToJson converterJson;
 
-    @Before
+    @BeforeEach
     public void preparingTestScenario(){
         converterJson = new ConverterToJson();
     }
@@ -35,6 +34,5 @@ public class ConverterToJsonTest {
                 "    \"orders\": []\n" +
                 "  }\n" +
                 "]");
-
     }
 }

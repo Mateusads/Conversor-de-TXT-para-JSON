@@ -1,6 +1,8 @@
 package br.com.converter.json.service;
 
-import org.junit.Test;
+
+
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,7 +26,7 @@ public class ReadLineFileTest {
         var bufferRead = read.readingLineFile("./src/main/resources/fileTwoLine.txt");
 
         assertThat(bufferRead.readLine()).isEqualTo("0000000070                              Palmer Prosacco00000007530000000033     1836.7420210308");
-        assertThat(bufferRead.readLine()).isEqualTo("0000000075                                  Bobbie Batz000000079800000000226    1578.5720211116");
+        assertThat(bufferRead.readLine()).isEqualTo("0000000075                                  Bobbie Batz00000007980000000226     1578.5720211116");
     }
 
     @Test

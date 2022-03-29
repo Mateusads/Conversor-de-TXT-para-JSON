@@ -25,7 +25,7 @@ public class User {
     public void addOrder(Order order) {
         if (existingOrder.containsKey(order.getId())) {
             var orderExistent = existingOrder.get(order.getId());
-            for (Product product : order.getProductList()) {
+            for (Product product : order.getProducts()) {
                 orderExistent.addProduct(product);
             }
         } else {

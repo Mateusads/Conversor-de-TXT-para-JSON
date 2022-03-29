@@ -14,10 +14,6 @@ public class ResponseProcessUser {
 
     private ProcessingObject processingObject;
 
-    public ResponseProcessUser(){
-        this.processingObject = new ProcessingObject();
-    }
-
     public Set<User> process(BufferedReader bufferedReader) throws IOException {
         Set<User> users = new HashSet<>();
         String line = "";
